@@ -1,0 +1,120 @@
+﻿@model IEnumerable<EMP_Management.Models.Employees>
+
+@{
+    ViewData["Title"] = "Index";
+}
+ <style type="text/css">
+    
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-align: left;
+    padding: 8px;
+}
+
+
+.table td {
+    padding: 8px;
+}
+
+
+.table a {
+    color: #007bff;
+    margin-right: 10px;
+}
+
+
+.add-new-link {
+    margin-bottom: 20px;
+}
+
+
+.filter-select {
+    margin-bottom: 20px;
+}
+
+
+.export-csv-btn {
+    margin-bottom: 20px;
+}
+      </style>
+
+<h1>Employee Management</h1>
+
+<p class="add-new-link">
+    <a asp-action="Create">Add New</a>
+</p>
+<form asp-controller="Employees" asp-action="FilterByDesignation" method="get" class="filter-select">
+    <label>Filter by Designation:</label>
+    <select name="designationFilter" onchange="this.form.submit()">
+        <option value="">All</option>
+        @foreach (var designation in Model.Select(e=>e.Designation).Distinct())
+        {
+                <option value="@designation">@designation</option>
+        }
+    </select>
+</form>
+
+<form asp-action="ExportCsv" method="Post" class="export-csv-btn"><button type="submit" class="btn btn-primary"><i class="fa fa-download"></i>Export CSV</button></form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Designation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">View</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

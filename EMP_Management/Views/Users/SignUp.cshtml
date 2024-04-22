@@ -1,0 +1,101 @@
+﻿@model EMP_Management.Models.Users
+
+@{
+    ViewData["Title"] = "SignUp";
+}
+  <style type="text/css">
+    
+.centered-form {
+    margin-top: 50px;
+}
+
+
+.signup-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+
+.signup-form label {
+    font-weight: bold;
+}
+
+
+.signup-form input[type="Email"],
+.signup-form input[type="password"] {
+    width: 300px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+
+.signup-form input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+
+.signup-form .text-danger {
+    font-size: 12px;
+}
+    </style>
+<div class="cenetred-form">
+    <div class="signup-form">
+
+  
+<h1>SignUp</h1>
+
+@* <h4>Users</h4> *@
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SignUp">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+           @*  <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                </label>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="Sign-up" class="btn btn-primary" />
+            </div>
+            <a asp-controller="Users" asp-action="Login">Already SignUp? Login here..!</a>
+        </form>
+    </div>
+</div>
+
+@* <div>
+    <a asp-action="Index">Back to List</a>
+</div> *@
+  </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
